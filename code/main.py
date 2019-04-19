@@ -1,6 +1,7 @@
 import numpy as np
-import os 
-from skimage import io
+import os
+from skimage import io, color
+from remove import median_filter
 
 def main():
     data_dir = os.path.dirname(__file__) + '../data/'
@@ -10,7 +11,7 @@ def main():
         img = io.imread(os.path.join(amsterdam_folder, f))
         if img is not None:
             amsterdam_images.append(img)
-    print(amsterdam_images)
+    io.imsave('test.png', median_filter(amsterdam_images))
 
 if __name__ == '__main__':
     main()
