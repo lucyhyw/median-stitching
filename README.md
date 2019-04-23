@@ -1,1 +1,1 @@
-# median-stiching
+# median-stitching
