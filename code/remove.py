@@ -21,7 +21,7 @@ def subtract(img0, img1, img2):
     greyscaleMask = np.array(np.clip(channel1 - channel2, 0, 1))#.astype(int)
     for i in range(c):
         res[:,:,i] = img0[:,:,i] * greyscaleMask + 10
-   return np.array(res).astype(int)
+    return np.array(res).astype(int)
 
 def mode_filter(images):
     img_arr = np.array(images)
