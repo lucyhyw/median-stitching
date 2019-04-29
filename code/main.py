@@ -45,10 +45,10 @@ def main(folder):
     # io.imsave('green.png', median_filter(green_images))
     green_folder = os.path.join(data_dir, "green")
     green_saved = "green.png"
-    img0 = io.imread(os.path.join(green_folder, "009.jpg"))
-    img1 = io.imread(os.path.join(green_folder, "009.jpg"), as_gray=True)
-    img2 = io.imread(green_saved, as_gray=True)
-    io.imsave('hahaha.png', subtract(img0,img1,img2))
+    # img0 = io.imread(os.path.join(green_folder, "009.jpg"))
+    img1 = io.imread(os.path.join(green_folder, "009.jpg"))
+    img2 = io.imread(green_saved)
+    io.imsave('hahaha.png', subtract(img1,img2))
     # img_folder = os.path.join(data_dir, folder)
     # images = []
     # for f in os.listdir(img_folder):

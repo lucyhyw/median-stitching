@@ -1,8 +1,7 @@
 import numpy as np
 import os
-import statistics
 from skimage import io
-from scipy import signal, stats
+from scipy import signal
 
 def median_filter(images):
     img_arr = np.array(images)
@@ -10,18 +9,22 @@ def median_filter(images):
     res = np.zeros((w,h,c))
     for i in range(c): # three rgb channels:
         channel = img_arr[:,:,:,i]
+        print(channel)
         res[:,:,i] = signal.medfilt(channel, kernel_size=(n,1,1))[n//2]
+    # print("res")
+    # print(res)
     return np.array(res).astype(int)
 
-def subtract(img0, img1, img2):
-    w,h,c = img0.shape
-    res = np.zeros((w,h, c))
-    channel1 = img1
-    channel2 = img2
-    greyscaleMask = np.array(np.clip(channel1 - channel2, 0, 1))#.astype(int)
+def subtract(img1, img2):
+    w,h,c = img1.shape
+    res = np.zeros((w,h,c))
     for i in range(c):
-        res[:,:,i] = img0[:,:,i] * greyscaleMask + 10
-   return np.array(res).astype(int)
+        channel1 = np.round(img1[:,:,i]).astype(int)
+        channel2 = np.round(img2[:,:,i]).astype(int)
+        res[:,:,i] = (channel1 - channel2) * 2
+        # print(chan100:200,100:200,i])
+    # print(res)
+    return np.array(np.clip(res, 0, 255)).astype(int)
 
 def mode_filter(images):
     img_arr = np.array(images)
