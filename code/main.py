@@ -6,6 +6,7 @@ from remove import median_filter, mode_filter, subtract
 
 def main(folder):
     data_dir = os.path.dirname(__file__) + '../data/'
+    folder = "ams"
     # img0 = io.imread(os.path.join(green_folder, "009.jpg"))
     # print(img0)
     # img1 = io.imread(os.path.join(green_folder, "009.jpg"), as_gray=True)
