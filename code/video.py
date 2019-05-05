@@ -26,7 +26,7 @@ for i in range(len(framesWeWant)):
     elif (i >= len(framesWeWant) - WINDOW_SIZE):
         video.write(np.uint8(median_filter(framesWeWant[i-WINDOW_SIZE: i+1: 10,:,:,:])))
     else:
-        video.write(np.uint8(median_filter(framesWeWant[i-WINDOW_SIZE: i+WINDOW_SIZE + 1,:,:,:])))
+        video.write(np.uint8(median_filter(framesWeWant[i-WINDOW_SIZE: i+WINDOW_SIZE + 1: 10,:,:,:])))
 
 cap.release()
 video.release()
