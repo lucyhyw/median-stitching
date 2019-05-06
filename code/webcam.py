@@ -27,9 +27,10 @@ def apply_median_filter(temp):
 
 def low_frequency(index):
     temp = imgs[index % LOW_FREQ :: LOW_FREQ]
-    cv2.imshow('webcam', apply_median_filter(temp))
+    med = apply_median_filter(temp)
+    cv2.imshow('webcam', med)
     key = cv2.waitKey(1)
-    return key != 27
+    return key != 27, med
 
 def high_frequency(index):
     if (len(imgs) < MAX_SIZE):
@@ -37,12 +38,15 @@ def high_frequency(index):
     else:
         temp = imgs[0 :: FREQUENCY]
 
-    cv2.imshow('webcam', apply_median_filter(temp))
+    med = apply_median_filter(temp)
+    cv2.imshow('webcam', med)
     key = cv2.waitKey(1)
-    return key != 27
+    return key != 27, med
 
 def main():
     vc = cv2.VideoCapture(0)
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    video = cv2.VideoWriter('webcam_video.avi',fourcc, 2, (640,360))
     if vc.isOpened():
         rval, frame = vc.read()
     else:
@@ -51,10 +55,12 @@ def main():
     while rval and i < 10000:
         rval = update_imgs(vc)
         if (i <= 2 * HIGH_FREQ):
-            rval = low_frequency(i)
+            rval, frame = low_frequency(i)
         else:
-            rval = high_frequency(i)
+            rval, frame = high_frequency(i)
+        video.write(frame)
         i += 1
+    video.release()
     cv2.destroyWindow("preview")
 
 if __name__ == '__main__':
